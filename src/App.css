@@ -1,6 +1,5 @@
 html {
   color: #fff;
-  background-color: #181824;
 }
 
 .App {
@@ -12,6 +11,12 @@ html {
   justify-content: center;
   min-height: 100vh;
   margin-top: -1.5em;
+}
+
+.App.light {
+  background-image: url("/src/bg-desktop-light.jpg");
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
 
 #app_body {
@@ -41,9 +46,11 @@ html {
 
 #task_input {
   width: 98%;
-  height: 2.5em;
+  height: 2em;
   background-color: #25273C;
   border: none;
+  color: #fff;
+  font-size: 100%;
 }
 
 #tasks {
@@ -64,12 +71,18 @@ html {
 #add_task {
   background: linear-gradient(#e66465, #9198e5);
   border-radius: 50%;
-  height: 1.5em;
-  width: 1.5em;
+  height: 1.4em;
+  width: 1.4em;
   cursor: pointer;
 }
 
+/* icons */
+
 .check-icon {
-  margin: 6px auto;
-  width: 15px;
+  margin: 5px auto;
+  width: 13px;
+}
+
+#brightness_icon {
+  cursor: pointer;
 }

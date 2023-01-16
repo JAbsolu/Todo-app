@@ -1,6 +1,7 @@
 import './App.css';
 import sun_icon from './icon-sun.svg';
 import check_icon from './icon-check.svg';
+import moon_icon from './icon-moon.svg';
 
 function App() {
   return (
@@ -13,10 +14,10 @@ function App() {
 function AppBody() {
   return ( 
       <div id='app_body'>
-        <h1>TODO <span><img src={sun_icon} alt="sun icon"/> </span></h1>
+        <h1>TODO <span><img src={sun_icon} onClick={changeBrightness} id="brightness_icon" alt="sun icon"/> </span></h1>
         <div id='add_task_div'>
           <span id='add_task' onClick={addTask}><img className='check-icon' src={check_icon} alt="check icon"/></span>
-          <input id="task_input" name="task" type="text" placeholder='Enter a task' />
+          <input id="task_input" name="task" type="text" placeholder='Enter a task...' />
         </div>
 
         <section id="tasks">
@@ -28,26 +29,40 @@ function AppBody() {
 
 function addTask() {
   
-  const taskInput = document.querySelector("#task_input");
-  const taskList  = document.querySelector("#task_list");
+  const taskInput    = document.querySelector("#task_input");
+  const taskList     = document.querySelector("#task_list");  
+  let enteredTask    = taskInput.value; //get the value of the text type in the task input field
 
-  if (taskInput.value !== "") {
-    const newTask       = document.createElement("p"); //create a new p element
-    newTask.textContent = taskInput.value; // add the inputed value to the p element
-    const addedTask     = taskList.appendChild(newTask) // add the task to the list
-
-    let saveTasks = localStorage.TodoTasks || ""; // create a local storage for the tasks
-    localStorage.TodoTasks = saveTasks.concat(addedTask); //add the task to the local storage
-
-
-    taskInput.value = "";
+  if (taskInput.value === "") {
+    taskInput.placeholder = "Enter a task before adding to list";
+    taskInput.focus()
   } else {
-    alert("please enter a task")
-    taskInput.focus();
+    let taskP = document.createElement("p");
+    taskP.textContent = enteredTask;
+    taskList.appendChild(taskP);
+
+    let savedTasks = localStorage.TodoTasks || ""; // create a local storage for the tasks
+
+    for (let task of taskList.children) {
+      localStorage.TodoTasks = savedTasks.concat(task.textContent, "\n"); //add the task to the local storage
+    }
+    
+    taskInput.value = ""; //clear task input value
+    taskInput.placeholder = "Enter a task...";
   }
 
 };
 
+//function to change brightness and sun and moon icon
+function changeBrightness() {
+  const brightness = document.querySelector("#brightness_icon");
+  const app    = document.querySelector(".App");
+  
+  if (brightness.src !== moon_icon) brightness.src = moon_icon
+  else brightness.src = sun_icon;
+
+  app.classList.toggle("light");
+};
 
 
 

@@ -40,6 +40,11 @@ html {
   align-items: center;
 }
 
+#add_task_div.light {
+  background-color: #fff;
+  color: #181824;
+}
+
 .task-radio {
   width: 20px;
 }
@@ -53,6 +58,10 @@ html {
   font-size: 100%;
 }
 
+#task_input.light {
+  background-color: #fff;
+}
+
 #tasks {
   text-align: left;
   width: 27em;
@@ -60,6 +69,12 @@ html {
   min-height: 10em;
   background-color: #25273C;
   display: block;
+  box-shadow: 1px 1px 2px 0px #181824;
+}
+
+#tasks.light {
+  background-color: #fff;
+  box-shadow: 1px 1px 2px 0px #aeaeae;
 }
 
 #tasks p {

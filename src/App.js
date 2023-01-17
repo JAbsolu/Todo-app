@@ -57,11 +57,19 @@ function addTask() {
 function changeBrightness() {
   const brightness = document.querySelector("#brightness_icon");
   const app    = document.querySelector(".App");
+  const tasksDiv = document.querySelector("#add_task_div");
+  const taskInput    = document.querySelector("#task_input");
+  const taskSection = document.querySelector("#tasks");
+  
   
   if (brightness.src !== moon_icon) brightness.src = moon_icon
   else brightness.src = sun_icon;
 
   app.classList.toggle("light");
+  tasksDiv.classList.toggle("light");
+  taskInput.classList.toggle("light");
+  taskSection.classList.toggle("light");
+
 };
 
 

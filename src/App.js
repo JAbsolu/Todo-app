@@ -55,11 +55,11 @@ function addTask() {
 
 //function to change brightness and sun and moon icon
 function changeBrightness() {
-  const brightness = document.querySelector("#brightness_icon");
-  const app    = document.querySelector(".App");
-  const tasksDiv = document.querySelector("#add_task_div");
+  const brightness   = document.querySelector("#brightness_icon");
+  const app          = document.querySelector(".App");
+  const tasksDiv     = document.querySelector("#add_task_div");
   const taskInput    = document.querySelector("#task_input");
-  const taskSection = document.querySelector("#tasks");
+  const taskSection  = document.querySelector("#tasks");
   
   
   if (brightness.src !== moon_icon) brightness.src = moon_icon

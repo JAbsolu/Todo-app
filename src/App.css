@@ -1,5 +1,6 @@
 html {
   color: #fff;
+  background-color: #181824;
 }
 
 .App {
@@ -11,17 +12,20 @@ html {
   justify-content: center;
   min-height: 100vh;
   margin-top: -1.5em;
+  transition: ease-in-out 1s;
 }
 
 .App.light {
   background-image: url("/src/bg-desktop-light.jpg");
   background-repeat: no-repeat;
   background-color: #fff;
+  transition: ease-in-out 1s;
 }
 
 #app_body {
   width: 27em;
   margin: auto;
+  transition: ease-in-out 1s;
 }
 
 #app_body h1 {
@@ -38,6 +42,7 @@ html {
   padding: 5px 5px 5px 8px;
   justify-content: center;
   align-items: center;
+  transition: ease-in-out 1s;
 }
 
 #add_task_div.light {
@@ -56,10 +61,16 @@ html {
   border: none;
   color: #fff;
   font-size: 100%;
+  transition: ease-in-out 1s;
+}
+
+#task_input:focus {
+  outline-style: none;
 }
 
 #task_input.light {
   background-color: #fff;
+  color: #2e2e2e;
 }
 
 #tasks {
@@ -70,17 +81,28 @@ html {
   background-color: #25273C;
   display: block;
   box-shadow: 1px 1px 2px 0px #181824;
+  transition: ease-in-out 1s;
 }
 
 #tasks.light {
   background-color: #fff;
   box-shadow: 1px 1px 2px 0px #aeaeae;
+  color: #2e2e2e;
 }
 
 #tasks p {
   margin: 0;
   padding: 10px;
   border-bottom: solid #37394E;
+}
+
+.taskParagraph.light {
+  border-bottom: solid #cacaca;
+
+}
+
+#tasks p:last-child {
+  border-bottom: none;
 }
 
 #add_task {

@@ -121,6 +121,7 @@ html {
 }
 
 #brightness_icon {
+  transition:1s ease-in-out;
   cursor: pointer;
   content: url('/src/icon-sun.svg');
   padding: .5rem;
@@ -128,6 +129,7 @@ html {
 
 #brightness_icon.active {
   content: url('/src/icon-moon.svg');
+  transform: rotate(360deg);
 }
 
 @media (max-width: 500px) {

@@ -122,6 +122,12 @@ html {
 
 #brightness_icon {
   cursor: pointer;
+  content: url('/src/icon-sun.svg');
+  padding: .5rem;
+}
+
+#brightness_icon.active {
+  content: url('/src/icon-moon.svg');
 }
 
 @media (max-width: 500px) {

@@ -14,7 +14,7 @@ function App() {
 function AppBody() {
   return ( 
       <div id='app_body'>
-        <h1>TODO <span><img src={sun_icon} onClick={changeBrightness} id="brightness_icon" alt="sun icon"/> </span></h1>
+        <h1>TODO <span onClick={changeBrightness} id="brightness_icon" alt="sun icon"></span></h1>
         <div id='add_task_div'>
           <span id='add_task' onClick={addTask}><img className='check-icon' src={check_icon} alt="check icon"/></span>
           <input id="task_input" name="task" type="text" placeholder='Enter a task...' />
@@ -63,11 +63,8 @@ function changeBrightness() {
   const taskInput    = document.querySelector("#task_input");
   const taskSection  = document.querySelector("#tasks");
   
-  
-  if (brightness.src !== moon_icon) brightness.src = moon_icon
-  else brightness.src = sun_icon;
-
-  app.classList.toggle("light");
+  brightness.classList.toggle('active'); // change the brightness icon onlclick
+  app.classList.toggle("light"); 
   tasksDiv.classList.toggle("light");
   taskInput.classList.toggle("light");
   taskSection.classList.toggle("light");

@@ -132,4 +132,8 @@ html {
   #tasks {
     width: 100%;
   }
+
+  #task_input {
+    max-width: 99%;
+  }
 }

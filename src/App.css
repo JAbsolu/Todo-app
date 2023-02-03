@@ -93,7 +93,7 @@ html {
 #tasks p {
   margin: 0;
   padding: 10px;
-  border-bottom: solid #37394E;
+  border-bottom: solid #37394eb5;
 }
 
 .taskParagraph.light {
@@ -122,4 +122,14 @@ html {
 
 #brightness_icon {
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  #app_body {
+    width: 95%;
+  }
+
+  #tasks {
+    width: 100%;
+  }
 }

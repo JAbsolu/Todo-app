@@ -125,6 +125,10 @@ html {
 }
 
 @media (max-width: 500px) {
+  body {
+    height: auto;
+  }
+
   #app_body {
     width: 95%;
   }
@@ -134,6 +138,6 @@ html {
   }
 
   #task_input {
-    max-width: 50%;
+    max-width: 100%;
   }
 }

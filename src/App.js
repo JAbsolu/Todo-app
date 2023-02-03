@@ -34,7 +34,9 @@ function addTask() {
   let enteredTask    = taskInput.value; //get the value of the text type in the task input field
 
   if (taskInput.value === "") {
-    taskInput.placeholder = "Enter a task before adding to list";
+    // taskInput.placeholder = "Please enter a task first";
+    let value = prompt('Please enter a task to continue');
+    taskInput.value = value
     taskInput.focus()
   } else {
     let taskP = document.createElement("p");

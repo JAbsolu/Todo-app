@@ -1,7 +1,5 @@
 import './App.css';
-import sun_icon from './icon-sun.svg';
 import check_icon from './icon-check.svg';
-import moon_icon from './icon-moon.svg';
 
 function App() {
   return (
@@ -27,7 +25,12 @@ function AppBody() {
   );
 }
 
-function addTask() {
+// This code below
+// let users type task and add it to the list
+
+const taskArray = []; //the empty array to store tasks
+
+const addTask = () => {
   
   const taskInput    = document.querySelector("#task_input");
   const taskList     = document.querySelector("#task_list");  
@@ -35,42 +38,53 @@ function addTask() {
 
   if (taskInput.value === "") {
     // taskInput.placeholder = "Please enter a task first";
-    let value = prompt('Please enter a task to continue');
-    taskInput.value = value
-    taskInput.focus()
+    let promptValue = prompt('Please add a task to continue'); //promt the user to add a task
+    taskInput.value = promptValue; //add the user's text from prompt to the input field
+    taskInput.focus() //set the focus on the input field
   } else {
-    let taskP = document.createElement("p");
-    taskP.textContent = enteredTask;
-    taskList.appendChild(taskP);
+    taskArray.push(enteredTask);
+    localStorage.setItem('tasks', JSON.stringify(taskArray))
+    let storedTasks = JSON.parse(localStorage.getItem('tasks'));
 
-    let savedTasks = localStorage.TodoTasks || ""; // create a local storage for the tasks
-
-    for (let task of taskList.children) {
-      localStorage.TodoTasks = savedTasks.concat(task.textContent, "\n"); //add the task to the local storage
+    let taskP = document.createElement("p"); // creates a new p element
+    for (let task of storedTasks) { 
+      taskP.textContent = task; // Takes the entered task in the input field and adds it to the p element
     }
+    taskList.appendChild(taskP); //appends the p tag to the tasklist div
     
     taskInput.value = ""; //clear task input value
     taskInput.placeholder = "Enter a task...";
   }
-
 };
 
 //function to change brightness and sun and moon icon
-function changeBrightness() {
+const changeBrightness = () => {
   const brightness   = document.querySelector("#brightness_icon");
   const app          = document.querySelector(".App");
   const tasksDiv     = document.querySelector("#add_task_div");
   const taskInput    = document.querySelector("#task_input");
   const taskSection  = document.querySelector("#tasks");
   
-  brightness.classList.toggle('active'); // change the brightness icon onlclick
-  app.classList.toggle("light"); 
-  tasksDiv.classList.toggle("light");
-  taskInput.classList.toggle("light");
-  taskSection.classList.toggle("light");
-
+  brightness.classList.toggle('active'); // changes the brightness icon onlclick
+  app.classList.toggle("light");  //changes brightness level on app div
+  tasksDiv.classList.toggle("light"); //changes brightness on task div
+  taskInput.classList.toggle("light"); //changes brightness on input field
+  taskSection.classList.toggle("light"); //changes brightness on the task list section
 };
 
+window.addEventListener('load', () => {
+  // const taskInput = document.querySelector("#task_input");
+  let storedTasks = JSON.parse(localStorage.getItem('tasks'));
+  const taskList     = document.querySelector("#task_list"); 
+  const taskContainer = document.querySelector('#tasks'); 
 
+  if (storedTasks) {
+    for (let task of storedTasks) {
+      let pTag = document.createElement("p");
+      pTag.textContent = task;
+      taskList.appendChild(pTag)
+    };
+  };
+})
 
 export default App;

@@ -117,6 +117,31 @@ html {
   cursor: pointer;
 }
 
+#tasks_list {
+  display: grid;
+  grid-template-columns: 10% 90%;
+}
+
+#task_menu {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  justify-content: left;
+  background-color: #25273C;
+  margin-top: 0;
+  padding: .7rem;
+}
+
+#task_menu p {
+  margin: 0;
+  padding: 0;
+  font-size: 70%;
+  color: #9198e5;
+}
+
+#clear {
+  cursor: pointer;
+}
+
 /* icons */
 
 .check-icon {

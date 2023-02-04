@@ -19,8 +19,13 @@ function AppBody() {
         </div>
 
         <section id="tasks">
-          <div id="task_list"></div>
+          <div id="task_list">
+          </div>
         </section>
+        <div id='task_menu'>
+            <p id='active-tasks'>Active</p>
+            <p id='clear' onClick={clear}>Clear taks</p>
+          </div>
       </div>
   );
 }
@@ -72,11 +77,23 @@ const changeBrightness = () => {
   taskSection.classList.toggle("light"); //changes brightness on the task list section
 };
 
+
+//clear tasks
+
+const clear = () => {
+  let storedTasks = JSON.parse(localStorage.getItem('tasks'));
+  const taskList     = document.querySelector("#task_list"); 
+
+  if (storedTasks) {
+    localStorage.removeItem('tasks');
+  }
+}
+
 window.addEventListener('load', () => {
   // const taskInput = document.querySelector("#task_input");
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));
   const taskList     = document.querySelector("#task_list"); 
-  const taskContainer = document.querySelector('#tasks'); 
+
 
   if (storedTasks) {
     for (let task of storedTasks) {
@@ -85,6 +102,11 @@ window.addEventListener('load', () => {
       taskList.appendChild(pTag)
     };
   };
+
+  const activeTasks = document.querySelector('#active-tasks');
+  let numberOfTasks = taskList.childElementCount;
+  activeTasks.textContent += ' ' + numberOfTasks;
+
 })
 
 export default App;

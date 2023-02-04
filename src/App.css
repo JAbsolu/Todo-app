@@ -87,18 +87,22 @@ html {
 #tasks.light {
   background-color: #fff;
   box-shadow: 1px 1px 2px 0px #aeaeae;
-  color: #2e2e2e;
+  color: #3a3a3a;
 }
 
 #tasks p {
   margin: 0;
   padding: 10px;
-  border-bottom: solid #37394eb5;
+  border-bottom: solid 1px #545777b5;
 }
 
 .taskParagraph.light {
   border-bottom: solid #cacaca;
 
+}
+
+#tasks p:last-child {
+  border-bottom: solid 1px #545777b5;
 }
 
 #tasks p:last-child {

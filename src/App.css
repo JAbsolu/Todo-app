@@ -177,6 +177,7 @@ html {
 .check-icon {
   margin: 5px auto;
   width: 13px;
+  content: url('./icon-check.svg');
 }
 
 #brightness_icon {

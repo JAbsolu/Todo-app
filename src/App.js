@@ -14,7 +14,7 @@ function AppBody() {
       <div id='app_body'>
         <h1>TODO <span onClick={changeBrightness} id="brightness_icon" alt="sun icon"></span></h1>
         <div id='add_task_div'>
-          <span id='add_task' onClick={addTask}><img className='check-icon' src={check_icon} alt="check icon"/></span>
+          <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"/></span>
           <input id="task_input" name="task" type="text" placeholder='Enter a task...' />
         </div>
 
@@ -33,9 +33,8 @@ function AppBody() {
   );
 }
 
-// This code below
-// let users type task and add it to the list
 
+// This code below let users type task and add it to the list
 const taskArray = []; //the empty array to store tasks
 
 const addTask = () => {

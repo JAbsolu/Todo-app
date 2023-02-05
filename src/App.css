@@ -92,7 +92,7 @@ html {
 
 #tasks p {
   margin: 0;
-  padding: 10px;
+  padding: .85rem 1rem;
   border-bottom: solid 1px #545777b5;
 }
 
@@ -125,21 +125,51 @@ html {
 #task_menu {
   display: grid;
   grid-template-columns: 50% 50%;
-  justify-content: left;
+  justify-content: first baseline;
   background-color: #25273C;
   margin-top: 0;
   padding: .7rem;
+  border-top: solid .08rem #545777b5;
+  box-shadow: 1px 1px 2px 0px #181824;
+  transition: ease-in-out 1s;
+}
+
+#task_menu div {
+  display: flex;
+}
+
+#task_menu div span {
+  margin-right: .3rem;
+}
+
+#task_menu.light {
+  background-color: #fff;
+  color: #3a3a3a;
+  box-shadow: 1px 1px 2px 0px #aeaeae;
+  border-top: none;
 }
 
 #task_menu p {
   margin: 0;
   padding: 0;
-  font-size: 70%;
-  color: #9198e5;
+  font-size: 100%;
+  color: #5c5d78;
+  transition: ease-in-out 1s;
+}
+
+#active-tasks {
+  color: #5c5d78;
+  font-weight: bold;
 }
 
 #clear {
   cursor: pointer;
+}
+
+#clear:hover,
+#clear:active
+ {
+  text-decoration: underline;
 }
 
 /* icons */

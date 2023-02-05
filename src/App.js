@@ -23,8 +23,11 @@ function AppBody() {
           </div>
         </section>
         <div id='task_menu'>
-            <p id='active-tasks'>Active</p>
-            <p id='clear' onClick={clear}>Clear taks</p>
+            <div>
+              <span id='active-tasks'>0</span>
+              <p>active task</p>
+            </div>
+            <p id='clear' onClick={clear}>clear all</p>
           </div>
       </div>
   );
@@ -39,6 +42,8 @@ const addTask = () => {
   
   const taskInput    = document.querySelector("#task_input");
   const taskList     = document.querySelector("#task_list");  
+  const activeTasks  = document.querySelector('#active-tasks');
+
   let enteredTask    = taskInput.value; //get the value of the text type in the task input field
 
   if (taskInput.value === "") {
@@ -59,27 +64,29 @@ const addTask = () => {
     
     taskInput.value = ""; //clear task input value
     taskInput.placeholder = "Enter a task...";
+    activeTasks.textContent = taskList.childElementCount;
   }
 };
 
 //function to change brightness and sun and moon icon
 const changeBrightness = () => {
-  const brightness   = document.querySelector("#brightness_icon");
-  const app          = document.querySelector(".App");
-  const tasksDiv     = document.querySelector("#add_task_div");
-  const taskInput    = document.querySelector("#task_input");
-  const taskSection  = document.querySelector("#tasks");
+  const brightness  = document.querySelector("#brightness_icon");
+  const app         = document.querySelector(".App");
+  const tasksDiv    = document.querySelector("#add_task_div");
+  const taskInput   = document.querySelector("#task_input");
+  const taskSection = document.querySelector("#tasks");
+  const taskMenu    = document.querySelector('#task_menu');
   
   brightness.classList.toggle('active'); // changes the brightness icon onlclick
   app.classList.toggle("light");  //changes brightness level on app div
   tasksDiv.classList.toggle("light"); //changes brightness on task div
   taskInput.classList.toggle("light"); //changes brightness on input field
   taskSection.classList.toggle("light"); //changes brightness on the task list section
+  taskMenu.classList.toggle("light");
 };
 
 
 //clear tasks
-
 const clear = () => {
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));
   const taskList     = document.querySelector("#task_list"); 
@@ -87,7 +94,16 @@ const clear = () => {
   if (storedTasks) {
     localStorage.removeItem('tasks');
   }
+
+  //clear tasks from DOM
+  for (let task of taskList.children) {
+    task.remove();
+    document.getElementById('active-tasks').textContent = 0;
+  };
+  
 }
+
+
 
 window.addEventListener('load', () => {
   // const taskInput = document.querySelector("#task_input");
@@ -105,7 +121,7 @@ window.addEventListener('load', () => {
 
   const activeTasks = document.querySelector('#active-tasks');
   let numberOfTasks = taskList.childElementCount;
-  activeTasks.textContent += ' ' + numberOfTasks;
+  activeTasks.textContent = numberOfTasks;
 
 })
 

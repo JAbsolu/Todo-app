@@ -105,10 +105,6 @@ html {
   border-bottom: solid 1px #545777b5;
 }
 
-#tasks p:last-child {
-  border-bottom: none;
-}
-
 #add_task {
   background: linear-gradient(#e66465, #9198e5);
   border-radius: 50%;

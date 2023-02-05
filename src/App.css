@@ -193,7 +193,7 @@ html {
 }
 
 @media (max-width: 500px) {
-  body {
+  .App {
     height: auto;
   }
 

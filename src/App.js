@@ -1,5 +1,4 @@
 import './App.css';
-import check_icon from './icon-check.svg';
 
 function App() {
   return (
@@ -14,8 +13,8 @@ function AppBody() {
       <div id='app_body'>
         <h1>TODO <span onClick={changeBrightness} id="brightness_icon" alt="sun icon"></span></h1>
         <div id='add_task_div'>
-          <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"/></span>
-          <input id="task_input" name="task" type="text" placeholder='Enter a task...' />
+          <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"  /></span>
+          <input id="task_input" onKeyDown={addTask} name="task" type="text" placeholder='Enter a task...' />
         </div>
 
         <section id="tasks">
@@ -37,7 +36,7 @@ function AppBody() {
 // This code below let users type task and add it to the list
 const taskArray = []; //the empty array to store tasks
 
-const addTask = () => {
+const addTask = evt => {
   
   const taskInput    = document.querySelector("#task_input");
   const taskList     = document.querySelector("#task_list");  
@@ -45,14 +44,9 @@ const addTask = () => {
 
   let enteredTask    = taskInput.value; //get the value of the text type in the task input field
 
-  if (taskInput.value === "") {
-    // taskInput.placeholder = "Please enter a task first";
-    let promptValue = prompt('Please add a task to continue'); //promt the user to add a task
-    taskInput.value = promptValue; //add the user's text from prompt to the input field
-    taskInput.focus() //set the focus on the input field
-  } else {
+  if (taskInput.value !== "" && evt.key === 'Enter') {
     taskArray.push(enteredTask);
-    localStorage.setItem('tasks', JSON.stringify(taskArray))
+    localStorage.setItem('tasks', JSON.stringify(taskArray));
     let storedTasks = JSON.parse(localStorage.getItem('tasks'));
 
     let taskP = document.createElement("p"); // creates a new p element
@@ -64,6 +58,10 @@ const addTask = () => {
     taskInput.value = ""; //clear task input value
     taskInput.placeholder = "Enter a task...";
     activeTasks.textContent = taskList.childElementCount;
+
+  } else {
+    taskInput.placeholder = "Type a task before adding to the list";
+    taskInput.focus() //set the focus on the input field
   }
 };
 
@@ -103,7 +101,7 @@ const clear = () => {
 }
 
 
-
+//functions to run on enter keydown
 window.addEventListener('load', () => {
   // const taskInput = document.querySelector("#task_input");
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));

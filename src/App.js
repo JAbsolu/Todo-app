@@ -14,7 +14,7 @@ function AppBody() {
         <h1>TODO <span onClick={changeBrightness} id="brightness_icon" alt="sun icon"></span></h1>
         <div id='add_task_div'>
         <input id="task_input" onKeyDown={addTask} name="task" type="text" placeholder='Enter a task...' />
-          <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"  /></span>
+          <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"/></span>
         </div>
 
         <section id="tasks">
@@ -44,8 +44,10 @@ const addTask = evt => {
 
   let enteredTask    = taskInput.value; //get the value of the text type in the task input field
 
-  if (taskInput.value !== "" && evt.key === 'Enter') {
-    taskArray.push(enteredTask);
+  if (evt.key === 'Enter' || evt.type === 'click') {
+
+    if (enteredTask !== "") taskArray.push(enteredTask); // add the value of entered task if not empty
+
     localStorage.setItem('tasks', JSON.stringify(taskArray));
     let storedTasks = JSON.parse(localStorage.getItem('tasks'));
 
@@ -53,17 +55,22 @@ const addTask = evt => {
     for (let task of storedTasks) { 
       taskP.textContent = task; // Takes the entered task in the input field and adds it to the p element
     }
-    taskList.appendChild(taskP); //appends the p tag to the tasklist div
+
+    if (enteredTask !== "") taskList.appendChild(taskP); //appends the p tag to the tasklist div
     
     taskInput.value = ""; //clear task input value
     taskInput.placeholder = "Enter a task...";
     activeTasks.textContent = taskList.childElementCount;
 
-  } else {
+  };
+
+  //trigger message if the task input field is empty
+  if (taskInput.value === "") {
     taskInput.placeholder = "Type a task before adding to the list";
     taskInput.focus() //set the focus on the input field
-  }
-};
+  };
+
+}; //end of task adding function
 
 //function to change brightness and sun and moon icon
 const changeBrightness = () => {
@@ -86,7 +93,7 @@ const changeBrightness = () => {
 //clear tasks
 const clear = () => {
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));
-  const taskList     = document.querySelector("#task_list"); 
+  const taskList  = document.querySelector("#task_list"); 
 
   if (storedTasks) {
     localStorage.removeItem('tasks');

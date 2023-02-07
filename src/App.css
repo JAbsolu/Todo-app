@@ -178,7 +178,8 @@ html {
 }
 
 .check-icon:hover, .check-icon:active {
-  transform: scale(1.1);
+  transform: scale(1.15);
+  transition: ease-in-out 500ms;
 }
 
 #brightness_icon{

@@ -98,10 +98,9 @@ const clear = () => {
     document.getElementById('active-tasks').textContent = 0;
   };
   
-}
+};
 
-
-//functions to run on enter keydown
+//retrieve tasks from local storage on load
 window.addEventListener('load', () => {
   // const taskInput = document.querySelector("#task_input");
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));

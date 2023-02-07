@@ -13,8 +13,8 @@ function AppBody() {
       <div id='app_body'>
         <h1>TODO <span onClick={changeBrightness} id="brightness_icon" alt="sun icon"></span></h1>
         <div id='add_task_div'>
+        <input id="task_input" onKeyDown={addTask} name="task" type="text" placeholder='Enter a task...' />
           <span id='add_task' onClick={addTask}><span className='check-icon' alt="check icon"  /></span>
-          <input id="task_input" onKeyDown={addTask} name="task" type="text" placeholder='Enter a task...' />
         </div>
 
         <section id="tasks">

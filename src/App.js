@@ -125,6 +125,8 @@ const clear = () => {
 
 //retrieve tasks from local storage on load
 window.addEventListener('load', () => {
+  alert('Cookies must be on for app to work properly');
+
   // const taskInput = document.querySelector("#task_input");
   let storedTasks = JSON.parse(localStorage.getItem('tasks'));
   const taskList     = document.querySelector("#task_list"); 

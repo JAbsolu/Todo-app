@@ -69,8 +69,9 @@ const addTask = evt => {
     taskInput.placeholder = "Type a task before adding to the list";
     taskInput.focus() //set the focus on the input field
   };
-
 }; //end of task adding function
+
+
 
 //function to change brightness and sun and moon icon
 const changeBrightness = () => {
@@ -87,7 +88,21 @@ const changeBrightness = () => {
   taskInput.classList.toggle("light"); //changes brightness on input field
   taskSection.classList.toggle("light"); //changes brightness on the task list section
   taskMenu.classList.toggle("light");
+
+
+  // below is the function that checks if the light theme is on
+  //if the thememode is not in local storage, it will add it there
+  //otherwise it will remove it because it was there already
+  let lightOn = localStorage.getItem('themeMode');
+  if (!lightOn) {
+    localStorage.setItem('themeMode', 'light'); 
+  } else {
+    localStorage.removeItem('themeMode');
+  }
 };
+
+
+
 
 
 //clear tasks
@@ -104,6 +119,7 @@ const clear = () => {
     task.remove();
     document.getElementById('active-tasks').textContent = 0;
   };
+
   
 };
 
@@ -125,6 +141,28 @@ window.addEventListener('load', () => {
   const activeTasks = document.querySelector('#active-tasks');
   let numberOfTasks = taskList.childElementCount;
   activeTasks.textContent = numberOfTasks;
+
+
+
+  // Get the theme mode on load, this will either show the bright mode or dark mode
+  // base on the local storage value
+  let themeValue = localStorage.getItem('themeMode');
+  
+  if (themeValue) {
+    const brightness  = document.querySelector("#brightness_icon");
+    const app         = document.querySelector(".App");
+    const tasksDiv    = document.querySelector("#add_task_div");
+    const taskInput   = document.querySelector("#task_input");
+    const taskSection = document.querySelector("#tasks");
+    const taskMenu    = document.querySelector('#task_menu');
+    
+    brightness.classList.toggle('active'); // changes the brightness icon onlclick
+    app.classList.toggle("light");  //changes brightness level on app div
+    tasksDiv.classList.toggle("light"); //changes brightness on task div
+    taskInput.classList.toggle("light"); //changes brightness on input field
+    taskSection.classList.toggle("light"); //changes brightness on the task list section
+    taskMenu.classList.toggle("light");
+  }
 
 })
 

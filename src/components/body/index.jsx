@@ -150,7 +150,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: !isMobileScreen ? '28rem': '97%',
+                    width: !isMobileScreen ? '28rem': '95%',
                     margin: '2rem auto 1rem',
                     padding: '0.4rem ',
                     background: themes.dark,
@@ -161,7 +161,7 @@ const Body = () => {
                         id='taskInput'
                         placeholder="Add task.."
                         style={{
-                            width: '97%',
+                            width: '95%',
                             margin: '0 auto',
                             fontSize: fontSizes.p,
                             padding: '0.5rem',
@@ -188,7 +188,7 @@ const Body = () => {
 
                 {/* THIS SECTION CONTAINS TASKS INPUT AND TASKS */}
                 <Box sx={{
-                    width: !isMobileScreen ? '28rem' : '97%',
+                    width: !isMobileScreen ? '28rem' : '95%',
                     background: colordark,
                     minHeight: '10rem',
                     padding: '0.4rem',

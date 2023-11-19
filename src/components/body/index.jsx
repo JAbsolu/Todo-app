@@ -150,7 +150,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: !isMobileScreen ? '28rem': '93%',
+                    width: !isMobileScreen ? '28rem': '97%',
                     margin: '2rem auto 1rem',
                     padding: '0.4rem ',
                     background: themes.dark,
@@ -188,7 +188,7 @@ const Body = () => {
 
                 {/* THIS SECTION CONTAINS TASKS INPUT AND TASKS */}
                 <Box sx={{
-                    width: !isMobileScreen ? '28rem' : '93%',
+                    width: !isMobileScreen ? '28rem' : '97%',
                     background: colordark,
                     minHeight: '10rem',
                     padding: '0.4rem',

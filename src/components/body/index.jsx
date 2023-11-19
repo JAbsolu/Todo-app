@@ -22,6 +22,7 @@ const Body = () => {
      * Media quieries
      */
     const isWideScreen = useMediaQuery("(min-width:2000px)");
+    const isMobileScreen = useMediaQuery("(max-width: 650px");
 
     useEffect(() => {
         // Fetch the tasks from local storage and update the state
@@ -84,7 +85,6 @@ const Body = () => {
         localStorage.setItem("Tasks", JSON.stringify(updatedArray))
     };
 
-    
 
     /**
      * Mark A task complete
@@ -99,16 +99,20 @@ const Body = () => {
         alert()
     }
 
+
     return (
         <Box sx={{
             height: '100vh',
+            maxWidth: '100vw',
             backgroundImage: `url(${desktopDark})`,
             backgroundRepeat: 'repeat-x',
+            margin: '0',
         }}>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                margin: '0',
             }}>
                 {/* THIS CONTAINER CONTAINS THE TITLE AND THE LIGHT/DARKMODE ICON */}
                 <Box>
@@ -116,7 +120,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: '28rem',
+                    width: !isMobileScreen ? '28rem' : '92%',
                     margin: '4rem auto 1rem',
                 }}>
                     <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center',fontSize: fontSizes.h2,fontWeight: 'bold',}}>
@@ -146,7 +150,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: '28rem',
+                    width: !isMobileScreen ? '28rem': '93%',
                     margin: '2rem auto 1rem',
                     padding: '0.4rem ',
                     background: themes.dark,
@@ -184,7 +188,7 @@ const Body = () => {
 
                 {/* THIS SECTION CONTAINS TASKS INPUT AND TASKS */}
                 <Box sx={{
-                    width: '28rem',
+                    width: !isMobileScreen ? '28rem' : '93%',
                     background: colordark,
                     minHeight: '10rem',
                     padding: '0.4rem',

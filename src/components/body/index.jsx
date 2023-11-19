@@ -23,6 +23,7 @@ const Body = () => {
      */
     const isWideScreen = useMediaQuery("(min-width:2000px)");
     const isMobileScreen = useMediaQuery("(max-width: 650px");
+    const isDesktopScreen = useMediaQuery("(min-width:1000px)");
 
     useEffect(() => {
         // Fetch the tasks from local storage and update the state
@@ -120,7 +121,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: !isMobileScreen ? '28rem' : '92%',
+                    width: isDesktopScreen  ? '40rem' : isMobileScreen ? '92%' :  '28rem',
                     margin: '4rem auto 1rem',
                 }}>
                     <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center',fontSize: fontSizes.h2,fontWeight: 'bold',}}>
@@ -150,7 +151,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: !isMobileScreen ? '28rem': '95%',
+                    width: isDesktopScreen  ? '40rem' : isMobileScreen ? '92%' :  '28rem',
                     margin: '2rem auto 1rem',
                     padding: '0.4rem ',
                     background: themes.dark,
@@ -188,7 +189,7 @@ const Body = () => {
 
                 {/* THIS SECTION CONTAINS TASKS INPUT AND TASKS */}
                 <Box sx={{
-                    width: !isMobileScreen ? '28rem' : '95%',
+                    width: isDesktopScreen  ? '40rem' : isMobileScreen ? '92%' :  '28rem',
                     background: colordark,
                     minHeight: '10rem',
                     padding: '0.4rem',

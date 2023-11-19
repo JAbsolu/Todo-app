@@ -12,9 +12,7 @@ import desktopDark from '../../assets/bg-desktop-light.png';
 import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 const Body = () => {
-    const [task, setTask] = useState('')
-    const [complete, markComplete] = useState(false)
-    const tasksList = {};
+    const [updatedTaskArray, setUpdatedTaskArray] = useState([]);
     const [darkTheme, setDarkTheme] = useState(false);
     const colordark = themes.dark;
     const colorwhite = themes.white;
@@ -25,17 +23,37 @@ const Body = () => {
      */
     const isWideScreen = useMediaQuery("(min-width:2000px)");
 
+    useEffect(() => {
+        // Fetch the tasks from local storage and update the state
+        const storedTasks = JSON.parse(localStorage.getItem("Tasks"));
+        if (storedTasks) {
+            setUpdatedTaskArray(storedTasks);
+        }
+    }, []); 
+
     /**
-     * Function to add new task
+     * Add tasks functions
      */
-    const onEnter = (evt) => {
-        if (evt.key === 'Enter' ) {
+    const add_task_on_enter = (evt) => {
+        if (evt.key === 'Enter') {
             let newTask = evt.target.value;
-            alert(newTask)
+
+            if (!localStorage.getItem("Tasks")) {
+                // If it doesn't exist, create a new array and store it in localStorage
+                const taskArray = [newTask];
+                localStorage.setItem("Tasks", JSON.stringify(taskArray));
+            } else {
+                // If it exists, retrieve the array, push the new task, and update localStorage
+                const taskArrayStr = localStorage.getItem("Tasks");
+                const taskArray = JSON.parse(taskArrayStr);
+                taskArray.push(newTask);
+                localStorage.setItem("Tasks", JSON.stringify(taskArray));
+            }
+            window.location.reload();
         }
     }
 
-    // const tasks = localStorage.setItem("Tasks", [])
+
     const add_task_by_click = () => {
         const taskInputVal = document.querySelector("#taskInput").value;
 
@@ -54,11 +72,19 @@ const Body = () => {
         window.location.reload();
     }
 
+
     /**
-     * Get the list of task from the local storage
+     * Mark A task complete
      */
-    const updatedTaskArrayStr = localStorage.getItem("Tasks");
-    const updatedTaskArray = JSON.parse(updatedTaskArrayStr);
+
+    const delete_task = (index) => {
+        const updatedArray = [...updatedTaskArray];
+        updatedArray.splice(index, 1);
+        setUpdatedTaskArray(updatedArray);
+        localStorage.setItem("Tasks", JSON.stringify(updatedArray))
+    };
+
+    
 
     /**
      * Mark A task complete
@@ -73,17 +99,7 @@ const Body = () => {
         alert()
     }
 
-    // useEffect(() => {
-    //     // if (localStorage.getItem("todo theme")) {
-    //     //     alert(localStorage.getItem("todo theme"))
-    //     // }
-    // })
-
-
     return (
-         /**
-            * Main Container
-         */
         <Box sx={{
             height: '100vh',
             backgroundImage: `url(${desktopDark})`,
@@ -149,7 +165,7 @@ const Body = () => {
                             color: lightGray,
                             border: 'none',
                         }}
-                        onKeyDown={onEnter}
+                        onKeyDown={add_task_on_enter}
                     />  
                     <AddBoxIcon 
                         onClick={add_task_by_click}
@@ -188,12 +204,12 @@ const Body = () => {
                                     justifyContent: "space-between",
                                 }}
                             >
-                                <CheckBoxIcon onClick={markComplete} sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
+                                <CheckBoxIcon sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
                                 
                                 <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%'}}>
                                     {task}
                                 </Box>
-                                <CloseIcon sx={{ "&:hover":{cursor: 'pointer'}}}/>
+                                <CloseIcon onClick={() => delete_task(index)} className="close-icon" sx={{ "&:hover":{cursor: 'pointer'}}}/>
                             </li>
                         ))}
                     </ul>

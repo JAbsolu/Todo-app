@@ -6,7 +6,7 @@ html {
 .App {
   text-align: center;
   background-color: #181824;
-  background-image: url("/src/bg-desktop-dark.jpg");
+  background-image: url("src/assets/bg-desktop-dark.jpg");
   background-repeat: no-repeat;
   display: block;
   justify-content: center;
@@ -16,7 +16,7 @@ html {
 }
 
 .App.light {
-  background-image: url("/src/bg-desktop-light.jpg");
+  background-image: url("src/assets/bg-desktop-light.jpg");
   background-repeat: no-repeat;
   background-color: #fff;
   transition: ease-in-out 1s;
@@ -53,25 +53,6 @@ html {
 
 .task-radio {
   width: 20px;
-}
-
-#task_input {
-  width: 96%;
-  height: 2em;
-  background-color: #25273C;
-  border: none;
-  color: #fff;
-  font-size: 100%;
-  transition: ease-in-out 1s;
-}
-
-#task_input:focus {
-  outline-style: none;
-}
-
-#task_input.light {
-  background-color: #fff;
-  color: #2e2e2e;
 }
 
 #tasks {
@@ -174,7 +155,7 @@ html {
 .check-icon {
   margin: -3.5px auto;
   width: 29px;
-  content: url('./plus.svg');
+  content: url('src/assets/plus.svg');
 }
 
 .check-icon:hover, .check-icon:active {
@@ -185,12 +166,12 @@ html {
 #brightness_icon{
   transition:1s ease-in-out;
   cursor: pointer;
-  content: url('/src/icon-sun.svg');
+  content: url('src/assets/icon-sun.svg');
   padding: .5rem;
 }
 
 #brightness_icon.active {
-  content: url('/src/icon-moon.svg');
+  content: url('src/assets/icon-moon.svg');
   transform: rotate(360deg);
 }
 

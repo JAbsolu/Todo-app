@@ -172,8 +172,8 @@ const Body = () => {
                                         color: colorwhite,
                                         '&:hover': {
                                             cursor: 'pointer',
-                                            transform: 'rotate(360)',
-                                            transition: 'ease-in-out',
+                                            transform: 'rotate(-1.5turn)',
+                                            transition: '1s ease-in-out',
                                         }
                                     }}
                                 />
@@ -185,8 +185,8 @@ const Body = () => {
                                         fontSize: '2rem',
                                         '&:hover': {
                                             cursor: 'pointer',
-                                            transform: 'rotate(360)',
-                                            transition: 'ease-in-out',
+                                            transform: 'rotate(1.5turn)',
+                                            transition: '1s ease-in-out',
                                         }
                                     }}
                                 />

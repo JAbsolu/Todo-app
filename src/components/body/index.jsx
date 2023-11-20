@@ -34,7 +34,15 @@ const Body = () => {
         if (storedTasks) {
             setUpdatedTaskArray(storedTasks);
         }
+        //Focus on the task input filed
         taskInputRef.current.focus()
+
+        //Get saved theme on local storage
+        const is_dark = localStorage.getItem("Todo Dark Theme");
+        if (is_dark === 'true') {
+            setDarkTheme(true)
+        }
+
     }, []); 
 
     /**
@@ -91,6 +99,10 @@ const Body = () => {
         localStorage.setItem("Tasks", JSON.stringify(updatedArray))
     };
 
+     /**
+     * Clear all tasks function
+     */
+
     const clear_all_tasks = () => {
         const updatedArray = [...updatedTaskArray]
         updatedArray.splice(0, updatedArray.length);
@@ -98,18 +110,28 @@ const Body = () => {
         localStorage.setItem("Tasks", JSON.stringify(updatedArray))
     }
 
+    /**
+     * Mark a task complete function
+     */
+
     const markComplete = (index) => {
         // Get the current tasks array from localStorage
         const taskArrStr = localStorage.getItem("Tasks");
         const taskArr = JSON.parse(taskArrStr);
     };
-      
-      
 
+    /**
+     * Theme changing function
+     */
 
-    const changeTheme = () => {
-        setDarkTheme(true);
-        alert()
+    const toggle_theme = () => {
+      if(darkTheme === false) {
+        setDarkTheme(true)
+        localStorage.setItem("Todo Dark Theme", true)
+      } else {
+        setDarkTheme(false)
+        localStorage.setItem("Todo Dark Theme", false)
+      }
     }
 
 
@@ -139,24 +161,60 @@ const Body = () => {
                     <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center',fontSize: fontSizes.h2,fontWeight: 'bold',}}>
                         TODO 
                     </Typography>
-                    <LightModeIcon 
-                        onHover={changeTheme}
+
+                {/* CHANGE ICON BASE ON THEME MODE */}
+                    <Box>
+                        {
+                            darkTheme  === false ? (
+                                <DarkModeIcon 
+                                    onClick={() => toggle_theme(false)}
+                                    sx={{
+                                        color: colorwhite,
+                                        '&:hover': {
+                                            cursor: 'pointer',
+                                            transform: 'rotate(360)',
+                                            transition: 'ease-in-out',
+                                        }
+                                    }}
+                                />
+                            ) : (
+                                <LightModeIcon 
+                                    onClick={() =>toggle_theme(true)}
+                                    sx={{
+                                        color: colorwhite,
+                                        fontSize: '2rem',
+                                        '&:hover': {
+                                            cursor: 'pointer',
+                                            transform: 'rotate(360)',
+                                            transition: 'ease-in-out',
+                                        }
+                                    }}
+                                />
+                            )
+                        }
+                    </Box>
+
+                    {/* <DarkModeIcon 
+                        onClick={()=> toggle_theme(false)}
                         sx={{
                             color: colorwhite,
+                            display: !darkTheme ? 'block' : 'none',
+                        }}
+                    />
+                     <LightModeIcon 
+                        onClick={() => toggle_theme(true)}
+                        sx={{
+                            color: colorwhite,
+                            display: darkTheme ? 'block' : 'none',
                             fontSize: '2rem',
                             '&:hover': {
                                 cursor: 'pointer',
                                 transform: 'rotate(180deg)',
                             }
                         }}
-                    />
-                    <DarkModeIcon 
-                        onHover={changeTheme}
-                        sx={{
-                            color: colorwhite,
-                            display: darkTheme ? 'block' : 'none',
-                        }}
-                    />
+                    /> */}
+                    
+                {/* THEME ICONS CONTAINER CLOSED */}
                 </Box>
 
                 <Box sx={{

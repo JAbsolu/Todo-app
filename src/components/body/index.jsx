@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { Box, Typography, collapseClasses, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
+import Link from '@mui/material/Link';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import AddBoxIcon from '@mui/icons-material/AddBox';
@@ -90,11 +91,18 @@ const Body = () => {
         localStorage.setItem("Tasks", JSON.stringify(updatedArray))
     };
 
+    const clear_all_tasks = () => {
+        const updatedArray = [...updatedTaskArray]
+        updatedArray.splice(0, updatedArray.length);
+        setUpdatedTaskArray(updatedArray);
+        localStorage.setItem("Tasks", JSON.stringify(updatedArray))
+    }
+
     const markComplete = (index) => {
         // Get the current tasks array from localStorage
         const taskArrStr = localStorage.getItem("Tasks");
         const taskArr = JSON.parse(taskArrStr);
-      };
+    };
       
       
 
@@ -224,6 +232,55 @@ const Body = () => {
                             </li>
                         ))}
                     </ul>
+
+                    {/* Task area footer */}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'end',
+                            alignItems: 'end',
+                            minWidth: '100%',
+                            paddingBottom: '0',
+                        }}
+                    >
+                        {   
+                            updatedTaskArray.length > 1 ? (
+                                <ul style={{
+                                    listStyle: 'none',
+                                    color: lightGray,
+                                    display: 'inline-flex',
+                                    paddingBottom: '0',
+                                    margin: '0',
+                                }}>
+                                 <Typography
+                                      sx={{
+                                            color: lightGray,
+                                            p: '0.8rem 0.2rem 0',
+                                            textTransform: 'none',
+                                            marginRight: '2rem',
+                                        }}
+                                    >
+                                        Number of tasks: {updatedTaskArray.length}
+                                    </Typography>
+                                    <Link 
+                                        href='#'
+                                        onClick={clear_all_tasks}
+                                        sx={{
+                                            color: lightGray,
+                                            p: '1rem 0.2rem 0',
+                                            margin: '0',
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        Clear tasks
+                                    </Link>
+                                </ul>
+                            ) : (
+                                 null
+                            )
+                        }
+                    </Box>
+                    
                 </Box>
             </Box>
             

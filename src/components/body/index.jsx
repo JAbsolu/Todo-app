@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Box, Typography, collapseClasses, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -15,6 +15,7 @@ const Body = () => {
     const [updatedTaskArray, setUpdatedTaskArray] = useState([]);
     const [completed, setCompletion] = useState(false)
     const [darkTheme, setDarkTheme] = useState(false);
+    const taskInputRef = useRef(null)
     const colordark = themes.dark;
     const colorwhite = themes.white;
     const lightGray = themes.lightGray;
@@ -32,12 +33,14 @@ const Body = () => {
         if (storedTasks) {
             setUpdatedTaskArray(storedTasks);
         }
+        taskInputRef.current.focus()
     }, []); 
 
     /**
      * Add tasks functions
      */
     const add_task_on_enter = (evt) => {
+
         if (evt.key === 'Enter') {
             let newTask = evt.target.value;
 
@@ -162,6 +165,7 @@ const Body = () => {
                         type="text" 
                         id='taskInput'
                         placeholder="Add task.."
+                        ref={taskInputRef}
                         style={{
                             width: '95%',
                             margin: '0 auto',
@@ -197,7 +201,7 @@ const Body = () => {
                     margin: '0 auto',
                 }}>
                     <ul style={{ margin: 0, padding: '0 0.25rem',}}>
-                        {updatedTaskArray.map((task, index)=> (
+                        {updatedTaskArray.slice().reverse().map((task, index)=> (
                             <li id={index}
                                 style={{
                                     color: colorwhite,

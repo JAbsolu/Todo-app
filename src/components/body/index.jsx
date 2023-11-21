@@ -64,7 +64,7 @@ const Body = () => {
                 // If it exists, retrieve the array, push the new task, and update localStorage
                 const taskArrayStr = localStorage.getItem("Tasks");
                 const taskArray = JSON.parse(taskArrayStr);
-                taskArray.push(newTask);
+                taskArray.unshift(newTask);
                 localStorage.setItem("Tasks", JSON.stringify(taskArray));
             }
             window.location.reload();
@@ -84,7 +84,7 @@ const Body = () => {
             // If it exists, retrieve the array, push the new task, and update localStorage
             const taskArrayStr = localStorage.getItem("Tasks");
             const taskArray = JSON.parse(taskArrayStr);
-            taskArray.push(taskInputVal);
+            taskArray.unshift(taskInputVal);
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
         }
         window.location.reload();

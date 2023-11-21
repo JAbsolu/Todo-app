@@ -146,7 +146,6 @@ const Body = () => {
             backgroundColor: darkTheme ? themes.darketst : null,
             backgroundRepeat: 'repeat-x',
             margin: '0',
-            transition: "1.5s ease-in-out",
         }}>
             <Box sx={{
                 display: 'flex',
@@ -225,7 +224,7 @@ const Body = () => {
                             color: lightGray,
                             border: 'none',
                         }}
-                        sx={{ boxShadow: 2 }}
+                        sx={{ boxShadow: 2}}
                         onKeyDown={add_task_on_enter}
                     />  
                     <AddBoxIcon 
@@ -253,7 +252,7 @@ const Body = () => {
                     margin: '0 auto',
                 }}>
                     <ul style={{ margin: 0, padding: '0 0.25rem',}}>
-                        {updatedTaskArray.slice().reverse().map((task, index)=> (
+                        {updatedTaskArray.map((task, index)=> (
                             <li id={index}
                                 style={{
                                     color: colorwhite,

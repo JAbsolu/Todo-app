@@ -41,7 +41,7 @@ const Body = () => {
         taskInputRef.current.focus()
 
         //Get saved theme on local storage
-        const is_dark = localStorage.getItem("Todo Dark Theme");
+        const is_dark = localStorage.getItem("isDark");
         if (is_dark === 'true') {
             setDarkTheme(true)
         }
@@ -125,10 +125,15 @@ const Body = () => {
      */
 
     const markComplete = (index) => {
-        // Get the current tasks array from localStorage
-        const taskArrStr = localStorage.getItem("Tasks");
-        const taskArr = JSON.parse(taskArrStr);
-    };
+        // Toggle the isComplete property in the state
+        const updatedArray = [...updatedTaskArray];
+        updatedArray[index].isComplete = !updatedArray[index].isComplete;
+        setUpdatedTaskArray(updatedArray);
+    
+        // Update localStorage with the modified task array
+        localStorage.setItem("Tasks", JSON.stringify(updatedArray));
+      };
+      
 
     /**
      * Theme changing function
@@ -137,10 +142,10 @@ const Body = () => {
     const toggle_theme = () => {
       if(darkTheme === false) {
         setDarkTheme(true)
-        localStorage.setItem("Todo Dark Theme", true)
+        localStorage.setItem("isDark", true)
       } else {
         setDarkTheme(false)
-        localStorage.setItem("Todo Dark Theme", false)
+        localStorage.setItem("isDark", false)
       }
     }
 
@@ -271,7 +276,7 @@ const Body = () => {
                                     background: '#2f3251',
                                     display: "flex",
                                     justifyContent: "space-between",
-                                    textDecoration: completed ? 'line-through' : '',
+                                    textDecoration: task.isComplete ? 'line-through' : '',
                                 }}
                             >
                                 <CheckBoxIcon onClick={(() => markComplete(index)) }sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>

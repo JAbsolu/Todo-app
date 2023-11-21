@@ -133,7 +133,7 @@ const Body = () => {
         // Update localStorage with the modified task array
         localStorage.setItem("Tasks", JSON.stringify(updatedArray));
       };
-      
+
 
     /**
      * Theme changing function
@@ -278,9 +278,11 @@ const Body = () => {
                                     justifyContent: "space-between",
                                     textDecoration: task.isComplete ? 'line-through' : '',
                                 }}
-                            >
-                                <CheckBoxIcon onClick={(() => markComplete(index)) }sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
-                                
+                            >   
+                                {
+                                    task.isComplete ? <CheckBoxIcon onClick={(() => markComplete(index)) }sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
+                                    : <CheckBoxOutlineBlankIcon onClick={(() => markComplete(index)) }sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
+                                }                                
                                 <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%'}}>
                                     {task.task}
                                 </Box>

@@ -9,7 +9,10 @@ import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import CloseIcon from '@mui/icons-material/Close';
 import { themes, fontSizes } from "../../themes";
-import desktopDark from '../../assets/bg-desktop-light.png';
+import desktopLight from '../../assets/bg-desktop-light.png';
+import desktopDark from '../../assets/bg-desktop-dark.png';
+import mobileLight from '../../assets/bg-mobile-light.jpg';
+import mobileDark from '../../assets/bg-mobile-dark.jpg';
 import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 const Body = () => {
@@ -139,9 +142,11 @@ const Body = () => {
         <Box sx={{
             height: '100vh',
             maxWidth: '100vw',
-            backgroundImage: `url(${desktopDark})`,
+            backgroundImage: darkTheme ? `url(${ isMobileScreen ? mobileDark : desktopDark })` : `url(${ isMobileScreen ? mobileLight : desktopLight })`,
+            backgroundColor: darkTheme ? themes.darketst : null,
             backgroundRepeat: 'repeat-x',
             margin: '0',
+            transition: "1.5s ease-in-out",
         }}>
             <Box sx={{
                 display: 'flex',
@@ -193,27 +198,6 @@ const Body = () => {
                             )
                         }
                     </Box>
-
-                    {/* <DarkModeIcon 
-                        onClick={()=> toggle_theme(false)}
-                        sx={{
-                            color: colorwhite,
-                            display: !darkTheme ? 'block' : 'none',
-                        }}
-                    />
-                     <LightModeIcon 
-                        onClick={() => toggle_theme(true)}
-                        sx={{
-                            color: colorwhite,
-                            display: darkTheme ? 'block' : 'none',
-                            fontSize: '2rem',
-                            '&:hover': {
-                                cursor: 'pointer',
-                                transform: 'rotate(180deg)',
-                            }
-                        }}
-                    /> */}
-                    
                 {/* THEME ICONS CONTAINER CLOSED */}
                 </Box>
 
@@ -237,10 +221,11 @@ const Body = () => {
                             margin: '0 auto',
                             fontSize: fontSizes.p,
                             padding: '0.5rem',
-                            background: colordark,
+                            background: themes.dark,
                             color: lightGray,
                             border: 'none',
                         }}
+                        sx={{ boxShadow: 2 }}
                         onKeyDown={add_task_on_enter}
                     />  
                     <AddBoxIcon 
@@ -258,10 +243,11 @@ const Body = () => {
                 </Box>
                 
 
-                {/* THIS SECTION CONTAINS TASKS INPUT AND TASKS */}
+                {/* THIS SECTION CONTAINS TASKS */}
                 <Box sx={{
                     width: isMobileScreen ? '92%' : isDesktopScreen ? '40rem' : '28rem',
-                    background: colordark,
+                    boxShadow: 1,
+                    background: themes.dark,
                     minHeight: '10rem',
                     padding: '0.4rem',
                     margin: '0 auto',

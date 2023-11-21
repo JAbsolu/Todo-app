@@ -54,7 +54,10 @@ const Body = () => {
     const add_task_on_enter = (evt) => {
 
         if (evt.key === 'Enter') {
-            let newTask = evt.target.value;
+            const newTask = {
+                task: evt.target.value,
+                isComplete: false
+            }
 
             if (!localStorage.getItem("Tasks")) {
                 // If it doesn't exist, create a new array and store it in localStorage
@@ -74,17 +77,21 @@ const Body = () => {
 
     const add_task_by_click = () => {
         const taskInputVal = document.querySelector("#taskInput").value;
+        const newTask = {
+            task: taskInputVal,
+            isComplete: false
+        }
 
         // Check if "Tasks" key exists in localStorage
         if (!localStorage.getItem("Tasks")) {
             // If it doesn't exist, create a new array and store it in localStorage
-            const taskArray = [taskInputVal];
+            const taskArray = [newTask];
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
         } else {
             // If it exists, retrieve the array, push the new task, and update localStorage
             const taskArrayStr = localStorage.getItem("Tasks");
             const taskArray = JSON.parse(taskArrayStr);
-            taskArray.unshift(taskInputVal);
+            taskArray.unshift(newTask);
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
         }
         window.location.reload();
@@ -92,7 +99,7 @@ const Body = () => {
 
 
     /**
-     * Mark A task complete
+     * Delete a task function
      */
 
     const delete_task = (index) => {
@@ -270,7 +277,7 @@ const Body = () => {
                                 <CheckBoxIcon onClick={(() => markComplete(index)) }sx={{ marginRight: '0.3rem', "&:hover":{cursor: 'pointer'} }}/>
                                 
                                 <Box sx={{ display: 'flex', justifyContent: 'start', width: '100%'}}>
-                                    {task}
+                                    {task.task}
                                 </Box>
                                 <CloseIcon onClick={() => delete_task(index)} className="close-icon" sx={{ "&:hover":{cursor: 'pointer'}}}/>
                             </li>

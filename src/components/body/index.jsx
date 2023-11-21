@@ -67,7 +67,7 @@ const Body = () => {
                 taskArray.push(newTask);
                 localStorage.setItem("Tasks", JSON.stringify(taskArray));
             }
-            // window.location.reload();
+            window.location.reload();
         }
     }
 
@@ -87,7 +87,7 @@ const Body = () => {
             taskArray.push(taskInputVal);
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
         }
-        // window.location.reload();
+        window.location.reload();
     }
 
 

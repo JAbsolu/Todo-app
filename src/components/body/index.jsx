@@ -67,7 +67,7 @@ const Body = () => {
                 taskArray.push(newTask);
                 localStorage.setItem("Tasks", JSON.stringify(taskArray));
             }
-            window.location.reload();
+            // window.location.reload();
         }
     }
 
@@ -87,7 +87,7 @@ const Body = () => {
             taskArray.push(taskInputVal);
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
         }
-        window.location.reload();
+        // window.location.reload();
     }
 
 
@@ -146,6 +146,7 @@ const Body = () => {
             backgroundColor: darkTheme ? themes.darketst : null,
             backgroundRepeat: 'repeat-x',
             margin: '0',
+            transition: '1.5s ease-in-out'
         }}>
             <Box sx={{
                 display: 'flex',
@@ -168,15 +169,15 @@ const Body = () => {
 
                 {/* CHANGE ICON BASE ON THEME MODE */}
                     <Box>
-                        {
-                            darkTheme  === false ? (
+                        {darkTheme  === false ? (
                                 <DarkModeIcon 
                                     onClick={() => toggle_theme(false)}
                                     sx={{
                                         color: colorwhite,
+                                        fontSize: '2rem',
                                         '&:hover': {
                                             cursor: 'pointer',
-                                            transform: 'rotate(-1.5turn)',
+                                            transform: 'rotate(-2.5turn)',
                                             transition: '1s ease-in-out',
                                         }
                                     }}

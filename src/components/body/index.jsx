@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Box, Typography, collapseClasses, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { useState, useEffect } from "react";
 import Link from '@mui/material/Link';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -13,13 +13,11 @@ import desktopLight from '../../assets/bg-desktop-light.png';
 import desktopDark from '../../assets/bg-desktop-dark.png';
 import mobileLight from '../../assets/bg-mobile-light.jpg';
 import mobileDark from '../../assets/bg-mobile-dark.jpg';
-import { eventWrapper } from "@testing-library/user-event/dist/utils";
 
 const Body = () => {
     const [updatedTaskArray, setUpdatedTaskArray] = useState([]);
-    const [completed, setCompletion] = useState(false)
     const [darkTheme, setDarkTheme] = useState(false);
-    const taskInputRef = useRef(null)
+    const taskInputRef = useRef(null);
     const colordark = themes.dark;
     const colorwhite = themes.white;
     const lightGray = themes.lightGray;
@@ -27,9 +25,14 @@ const Body = () => {
      /**
      * Media quieries
      */
+
     const isWideScreen = useMediaQuery("(min-width:2000px)");
     const isMobileScreen = useMediaQuery("(max-width: 650px");
     const isDesktopScreen = useMediaQuery("(min-width:1000px)");
+
+    /**
+     * Use effect
+     */
 
     useEffect(() => {
         // Fetch the tasks from local storage and update the state
@@ -52,7 +55,6 @@ const Body = () => {
      * Add tasks functions
      */
     const add_task_on_enter = (evt) => {
-
         if (evt.key === 'Enter') {
             const newTask = {
                 task: evt.target.value,
@@ -63,39 +65,42 @@ const Body = () => {
                 // If it doesn't exist, create a new array and store it in localStorage
                 const taskArray = [newTask];
                 localStorage.setItem("Tasks", JSON.stringify(taskArray));
+                evt.target.value = '';
             } else {
-                // If it exists, retrieve the array, push the new task, and update localStorage
-                const taskArrayStr = localStorage.getItem("Tasks");
-                const taskArray = JSON.parse(taskArrayStr);
-                taskArray.unshift(newTask);
-                localStorage.setItem("Tasks", JSON.stringify(taskArray));
+                // updated the task array
+                const updatedArray = [...updatedTaskArray];
+                updatedArray.unshift(newTask);
+                setUpdatedTaskArray(updatedArray);
+                localStorage.setItem("Tasks", JSON.stringify(updatedArray))
+                evt.target.value = '';
             }
-            window.location.reload();
         }
-    }
+    };
 
 
     const add_task_by_click = () => {
         const taskInputVal = document.querySelector("#taskInput").value;
+        const taskDate = new Date().toDateString();;
         const newTask = {
             task: taskInputVal,
-            isComplete: false
+            isComplete: false,
+            date: taskDate,
         }
-
         // Check if "Tasks" key exists in localStorage
         if (!localStorage.getItem("Tasks")) {
             // If it doesn't exist, create a new array and store it in localStorage
             const taskArray = [newTask];
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
+            taskInputVal = '';
         } else {
-            // If it exists, retrieve the array, push the new task, and update localStorage
-            const taskArrayStr = localStorage.getItem("Tasks");
-            const taskArray = JSON.parse(taskArrayStr);
-            taskArray.unshift(newTask);
-            localStorage.setItem("Tasks", JSON.stringify(taskArray));
+            // updated the task array
+            const updatedArray = [...updatedTaskArray];
+            updatedArray.unshift(newTask);
+            setUpdatedTaskArray(updatedArray);
+            localStorage.setItem("Tasks", JSON.stringify(updatedArray))
+            taskInputVal = '';
         }
-        window.location.reload();
-    }
+    };
 
 
     /**
@@ -118,7 +123,7 @@ const Body = () => {
         updatedArray.splice(0, updatedArray.length);
         setUpdatedTaskArray(updatedArray);
         localStorage.setItem("Tasks", JSON.stringify(updatedArray))
-    }
+    };
 
     /**
      * Mark a task complete function
@@ -129,10 +134,24 @@ const Body = () => {
         const updatedArray = [...updatedTaskArray];
         updatedArray[index].isComplete = !updatedArray[index].isComplete;
         setUpdatedTaskArray(updatedArray);
-    
         // Update localStorage with the modified task array
         localStorage.setItem("Tasks", JSON.stringify(updatedArray));
       };
+
+
+      /**
+     * Calculate Number of completed task
+     */
+      let num_of_completed_tasks = 0;
+      const get_num_of_completed_tasks = () => {
+        // Toggle the isComplete property in the state
+        const updatedArray = [...updatedTaskArray];
+        for (let task of updatedArray) {
+            if (task.isComplete === true) {
+                num_of_completed_tasks += 1
+            }
+        }
+      }; get_num_of_completed_tasks();
 
 
     /**
@@ -147,7 +166,7 @@ const Body = () => {
         setDarkTheme(false)
         localStorage.setItem("isDark", false)
       }
-    }
+    };
 
 
     return (
@@ -175,7 +194,7 @@ const Body = () => {
                     width: isMobileScreen ? '92%' : isDesktopScreen ? '40rem' : '28rem',
                     margin: '4rem auto 1rem',
                 }}>
-                    <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center',fontSize: fontSizes.h2,fontWeight: 'bold',}}>
+                    <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center', fontSize: isMobileScreen ? fontSizes.h3 : fontSizes.h2,fontWeight: 'bold',}}>
                         TODO 
                     </Typography>
 
@@ -307,15 +326,27 @@ const Body = () => {
                                     listStyle: 'none',
                                     color: lightGray,
                                     display: 'inline-flex',
-                                    paddingBottom: '0',
+                                    padding: '0',
                                     margin: '0',
                                 }}>
+                                <Typography
+                                      sx={{
+                                            color: lightGray,
+                                            textTransform: 'none',
+                                            p: '0.8rem 0.2rem 0',
+                                            marginRight: '1rem',
+                                            fontSize: '0.8rem',
+                                        }}
+                                    >
+                                        Completed: {num_of_completed_tasks}
+                                    </Typography>
                                  <Typography
                                       sx={{
                                             color: lightGray,
                                             p: '0.8rem 0.2rem 0',
                                             textTransform: 'none',
-                                            marginRight: '2rem',
+                                            marginRight: '1rem',
+                                            fontSize: '0.8rem',
                                         }}
                                     >
                                         Number of tasks: {updatedTaskArray.length}
@@ -324,15 +355,20 @@ const Body = () => {
                                         href='#'
                                         onClick={clear_all_tasks}
                                         sx={{
-                                            color: lightGray,
-                                            p: '1rem 0.2rem 0',
+                                            color: '#4285f4',
+                                            fontWeight: 'bold',
+                                            fontSize: '0.95rem',
+                                            p: '0.75rem 0.2rem 0',
                                             margin: '0',
                                             textDecoration: 'none',
+                                            '&:hover': { textDecoration: 'underline'}
                                         }}
                                     >
                                         Clear tasks
                                     </Link>
+
                                 </ul>
+                                
                             ) : (
                                  null
                             )

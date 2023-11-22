@@ -349,10 +349,9 @@ const Body = () => {
                                             fontSize: '0.8rem',
                                         }}
                                     >
-                                        Number of tasks: {updatedTaskArray.length}
+                                        Number of tasks: {updatedTaskArray.length - num_of_completed_tasks}
                                     </Typography>
                                     <Link 
-                                        href='#'
                                         onClick={clear_all_tasks}
                                         sx={{
                                             color: '#4285f4',
@@ -361,7 +360,10 @@ const Body = () => {
                                             p: '0.75rem 0.2rem 0',
                                             margin: '0',
                                             textDecoration: 'none',
-                                            '&:hover': { textDecoration: 'underline'}
+                                            '&:hover': { 
+                                                textDecoration: 'underline', 
+                                                cursor: 'pointer',
+                                            }
                                         }}
                                     >
                                         Clear tasks

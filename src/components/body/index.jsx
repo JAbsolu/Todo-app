@@ -91,14 +91,12 @@ const Body = () => {
             // If it doesn't exist, create a new array and store it in localStorage
             const taskArray = [newTask];
             localStorage.setItem("Tasks", JSON.stringify(taskArray));
-            taskInputVal = '';
         } else {
             // updated the task array
             const updatedArray = [...updatedTaskArray];
             updatedArray.unshift(newTask);
             setUpdatedTaskArray(updatedArray);
             localStorage.setItem("Tasks", JSON.stringify(updatedArray))
-            taskInputVal = '';
         }
     };
 
@@ -191,7 +189,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: isMobileScreen ? '92%' : isDesktopScreen ? '40rem' : '28rem',
+                    width: isMobileScreen ? '92%' : isDesktopScreen ? '50rem' : '28rem',
                     margin: '4rem auto 1rem',
                 }}>
                     <Typography variant='h2' sx={{ color: colorwhite, textAlign: 'center', fontSize: isMobileScreen ? fontSizes.h3 : fontSizes.h2,fontWeight: 'bold',}}>
@@ -236,7 +234,7 @@ const Body = () => {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    width: isMobileScreen ? '92%' : isDesktopScreen ? '40rem' : '28rem',
+                    width: isMobileScreen ? '92%' : isDesktopScreen ? '50rem' : '28rem',
                     margin: '2rem auto 1rem',
                     padding: '0.4rem ',
                     background: themes.dark,
@@ -250,7 +248,7 @@ const Body = () => {
                         style={{
                             width: '95%',
                             margin: '0 auto',
-                            fontSize: fontSizes.p,
+                            fontSize: '1rem',
                             padding: '0.5rem',
                             background: themes.dark,
                             color: lightGray,
@@ -276,7 +274,7 @@ const Body = () => {
 
                 {/* THIS SECTION CONTAINS TASKS */}
                 <Box sx={{
-                    width: isMobileScreen ? '92%' : isDesktopScreen ? '40rem' : '28rem',
+                    width: isMobileScreen ? '92%' : isDesktopScreen ? '50rem' : '28rem',
                     boxShadow: 1,
                     background: themes.dark,
                     minHeight: '10rem',
@@ -290,7 +288,8 @@ const Body = () => {
                                     color: colorwhite,
                                     listStyle: 'none',
                                     padding: '0.8rem .5rem',
-                                    fontSize: '1.1rem',                                    
+                                    fontSize: '0.95rem',
+                                    lineHeight: '1.65rem',                                    
                                     margin: "0.4rem 0",
                                     background: '#2f3251',
                                     display: "flex",

@@ -289,7 +289,7 @@ const Body = () => {
                                     listStyle: 'none',
                                     padding: '0.8rem .5rem',
                                     fontSize: '0.95rem',
-                                    lineHeight: '1.65rem',                                    
+                                    lineHeight: '1.25rem',                                    
                                     margin: "0.4rem 0",
                                     background: '#2f3251',
                                     display: "flex",

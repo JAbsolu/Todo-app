@@ -284,6 +284,7 @@ const Body = () => {
                     <ul style={{ margin: 0, padding: '0 0.25rem',}}>
                         {updatedTaskArray.map((task, index)=> (
                             <li id={index}
+                                onClick={() => markComplete(index)}
                                 style={{
                                     color: colorwhite,
                                     listStyle: 'none',
